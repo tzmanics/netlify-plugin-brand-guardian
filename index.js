@@ -1,15 +1,12 @@
 const fs = require('fs');
+const readdirp = require('readdirp');
 
 module.exports = {
-  onPostBuild: ({ inputs, utils }) => {
-    console.log('🔎 Searching for misspelled keywords!');
+  onPostBuild: async ({ constants: { PUBLISH_DIR }, inputs, utils }) => {
+    console.log('🔎 Searching for misspelled keywords in:');
 
-    try {
-      const data = fs.readFileSync(inputs.pathToWordList);
-      console.log(data.toString());
-      //TODO: read in project html contents & check against json keys
-    } catch (err) {
-      utils.build.failPlugin(`Brand Guardian plugin failed with error: ${err}`);
+    for await (const entry of readdirp('.', { fileFilter: '*.html' })) {
+      console.log(`${JSON.stringify(entry.path)}`);
     }
   },
 };

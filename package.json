@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/tzmanics/netlify-plugin-brand-guardian/issues"
   },
-  "homepage": "https://github.com/tzmanics/netlify-plugin-brand-guardian#readme"
+  "homepage": "https://github.com/tzmanics/netlify-plugin-brand-guardian#readme",
+  "dependencies": {
+    "readdirp": "^3.4.0"
+  }
 }
