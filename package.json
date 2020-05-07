@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/tzmanics/netlify-plugin-brand-guardian#readme",
   "dependencies": {
-    "readdirp": "^3.4.0"
+    "hastscript": "^5.1.2",
+    "readdirp": "^3.4.0",
+    "rehype-parse": "^6.0.2",
+    "rehype-stringify": "^7.0.0",
+    "unified": "^9.0.0",
+    "unist-util-visit": "^2.0.2"
   }
 }
