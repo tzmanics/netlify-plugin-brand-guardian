@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/tzmanics/netlify-plugin-brand-guardian.git"
   },
-  "keywords": [],
+  "keywords": ["netlify", "netlify-plugin"],
   "author": "Tara Z. Manicsic <tzmanics@gmail.com> (https://tzmanics.dev/)",
   "license": "MIT",
   "bugs": {
