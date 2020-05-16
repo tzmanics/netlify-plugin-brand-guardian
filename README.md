@@ -1,20 +1,53 @@
 # 🔌 Netlify Plugin: Brand Guardian ☑️
 
-This is a [Build Plugin](https://docs.netlify.com/configure-builds/build-plugins/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex) searches all the HTML files in you project and looks for any misspelled words you provide changing them to the correct spelling. This is especially useful for brand words that may not be spelled the conventional way. I mean, who needs vowels, amirite, sorry, mrt 😬.
+This is a [Build Plugin](https://docs.netlify.com/configure-builds/build-plugins/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex) that searches all the HTML files in your project and looks for any misspelled words you provide changing them to the correct spelling. This is especially useful for brand words that may not be spelled the conventional way. I mean, who needs vowels, amirite, sorry, mrt 😬.
 
 ## Usage
 
 So you want to use this plugin, 😊 I'm honored. Here are the steps to get it installed and configured.
 
-1. Make sure you have [Build Plugins enabled](https://docs.netlify.com/configure-builds/build-plugins/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex#enable-build-plugins-beta)
+### 1. Make sure your project has [Build Plugins enabled](https://docs.netlify.com/configure-builds/build-plugins/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex#enable-build-plugins-beta)(<- this link shows you how).
 
-2. Add the plugin to your [`netlify.toml` configuration file](https://docs.netlify.com/configure-builds/file-based-configuration/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex).
+### 2. Add the plugin to your [`netlify.toml` configuration file](https://docs.netlify.com/configure-builds/file-based-configuration/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex).
 
-3. Make a JSON file of possible spelling snafus.
+First, you'll signify you're adding a plugin with ` [[plugins]]``. Then underneath add a line that tells Netlify where to find the plugin by providing the name to `package`.
 
-4. Add the path to that 👆 word list JSON file to your `netlify.toml` file.
+```toml
+[[plugins]]
+package = "netlify-plugin-brand-guardian"
+```
 
-5. Push those changes and get ready for the ✨magic ✨!
+### 3. Make a JSON file of possible spelling snafus.
+
+This JSON file should first list the correct spelling of the word you're looking for misspellings of followed by an array of strings listing the different ways it may be misspelled. Feel free to name it whatever you like. You'll be providing the path to this file as well so you can place it anywhere in the project directory.
+
+```json
+{
+  "Netlify": ["Nrtlify", "Nootlify", "netlifries", "netlify"],
+  "GitHub": ["gitHib"]
+}
+```
+
+> [🐙 You can see what this file looks like](https://github.com/tzmanics/demo-netlify-plugin-brand-guardian/blob/master/src/wordList.json) in the demo project repo.
+
+### 4. Add the path to your 👆 word list JSON file to your `netlify.toml` file.
+
+Underneath where you added this plugin in your `netlify.toml` file you'll add a place to declare `plugins.inputs`. For this plugin you will add a `pathToWordList` followed by a relative path the the file from the directory where your project is being published (like your `publish` location).
+
+```toml
+[[plugins]]
+package = "netlify-plugin-brand-guardian"
+  [plugins.inputs]
+  pathToWordList = "/data/brandMisspellings.json"
+```
+
+> [🐙 Here's a link](https://github.com/tzmanics/demo-netlify-plugin-brand-guardian/blob/master/netlify.toml) to the complete `netlify.toml` file of the demo project.
+
+### 5. Push those changes and get ready for the ✨magic ✨!
+
+If you already have your project [connected to your Git repo](https://docs.netlify.com/site-deploys/create-deploys/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex#deploy-with-git) when you push this new code it will deploy your project using this plugin. Otherwise, you can deploy your project [any other way you like](https://docs.netlify.com/site-deploys/overview/#deploy-summary?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex) and this plugin will search your project and make the changes requested 😘.
+
+> 🧠 For more information on using Netlify Build Plugins you can check out [this blog post](https://www.netlify.com/blog/2020/04/30/whats-a-netlify-build-plugin-series-part-1-using-build-plugins/?utm_source=repo&utm_medium=brand-guardian-tzm&utm_campaign=devex) covering just that.
 
 ## Demonstration
 
