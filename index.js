@@ -4,6 +4,10 @@ const { modifyHtml } = require('./modify-html');
 
 module.exports = {
   onPostBuild: async ({ constants: { PUBLISH_DIR }, inputs, utils }) => {
+    const wordListFile = `${PUBLISH_DIR}${inputs.pathToWordList}`;
+    if (!fs.existsSync(wordListFile)) {
+      utils.build.failBuild('No file at provided file path ☹️.');
+    }
     let brandWords = JSON.parse(
       fs.readFileSync(`${PUBLISH_DIR}${inputs.pathToWordList}`)
     );
